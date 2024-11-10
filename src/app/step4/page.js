@@ -35,8 +35,31 @@ export default function Step4() {
   };
 
   useEffect(() => {
+    const completeSurvey = async () => {
+      const { data: progressData } = await supabase
+        .from("survey_progress")
+        .select("*")
+        .eq("email", email)
+        .single();
+
+      if (progressData) {
+        await fetch("/api/survey", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: progressData.email,
+            first_question: progressData.data.step1,
+            second_question: progressData.data.step2,
+          }),
+        });
+
+        await supabase.from("survey_progress").delete().eq("email", email);
+      } else {
+      }
+    };
+
     completeSurvey();
-  }, []);
+  }, [email]);
 
   return (
     <div className="flex flex-col   gap-6 md:flex-row items-center justify-center min-h-screen bg-custom-gradient w-full text-white p-6">
