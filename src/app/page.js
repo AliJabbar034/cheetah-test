@@ -8,8 +8,6 @@ import Image from "next/image";
 import shoe from "./assests/shoe.png";
 import { TbArrowUpRight } from "react-icons/tb";
 import { submitSurvey } from "./actions/actions";
-import { revalidatePath } from "next/cache";
-
 export default function Step1() {
   const [email, setEmail] = useState("");
   const router = useRouter();
