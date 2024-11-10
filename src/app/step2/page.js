@@ -24,7 +24,6 @@ export default function Step2() {
     if (result.error) {
       setError("Failed to save your selection. Please try again.");
     } else {
-      revalidatePath("/step3");
       router.push("/step3");
     }
   };

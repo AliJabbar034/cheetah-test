@@ -37,7 +37,6 @@ export default function SurveyQuestion() {
 
       setError("Error saving your response. Please try again.");
     } else {
-      revalidatePath("/step4");
       router.push("/step4");
     }
   };

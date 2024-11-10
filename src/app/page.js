@@ -25,7 +25,7 @@ export default function Step1() {
     } else {
       setError("");
       emailHandler(email);
-      revalidatePath("/step2");
+
       router.push(`/step${result.step}`);
     }
   };
