@@ -8,6 +8,7 @@ import Image from "next/image";
 import shoe from "./assests/shoe.png";
 import { TbArrowUpRight } from "react-icons/tb";
 import { submitSurvey } from "./actions/actions";
+import { useEffect } from "react";
 export default function Step1() {
   const [email, setEmail] = useState("");
   const router = useRouter();
@@ -16,6 +17,18 @@ export default function Step1() {
   const [error, setError] = useState("");
 
   const handleStartSurvey = async () => {
+    if (!email || !email.includes("@")) {
+      setError("Please enter a valid email.");
+      return;
+    }
+    const response = await fetch(`/api/survey/?email=${email}`, {
+      method: "GET",
+    });
+
+    if (response.ok) {
+      router.push(`/step4`);
+      return;
+    }
     const result = await submitSurvey(email);
 
     if (result.error) {
