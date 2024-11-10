@@ -3,8 +3,12 @@ import mongoose from "mongoose";
 
 // MongoDB Connection
 const MONGODB_URI = process.env.MONGODB_URI;
-await mongoose.connect(MONGODB_URI);
 
+if (mongoose.connection.readyState === 0) {
+  console.log("Mongoose connection", MONGODB_URI);
+
+  await mongoose.connect(MONGODB_URI);
+}
 // Define Survey Schema
 const surveySchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
