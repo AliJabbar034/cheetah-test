@@ -5,7 +5,12 @@ import mongoose from "mongoose";
 const MONGODB_URI = process.env.MONGODB_URI;
 
 if (mongoose.connection.readyState === 0) {
-  console.log("Mongoose connection", MONGODB_URI);
+  console.log(
+    "Mongoose connection",
+    MONGODB_URI,
+    process.env.MONGODB_URI,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  );
 
   await mongoose.connect(MONGODB_URI);
 }
