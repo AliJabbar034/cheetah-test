@@ -8,6 +8,7 @@ import Image from "next/image";
 import shoe from "./assests/shoe.png";
 import { TbArrowUpRight } from "react-icons/tb";
 import { submitSurvey } from "./actions/actions";
+import { revalidatePath } from "next/cache";
 
 export default function Step1() {
   const [email, setEmail] = useState("");
@@ -19,13 +20,12 @@ export default function Step1() {
   const handleStartSurvey = async () => {
     const result = await submitSurvey(email);
 
-    console.log(result, "tttttttttttt");
-
     if (result.error) {
       setError(result.error);
     } else {
       setError("");
       emailHandler(email);
+      revalidatePath("/step2");
       router.push(`/step${result.step}`);
     }
   };

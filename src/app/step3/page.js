@@ -6,6 +6,7 @@ import { UseEmailContext } from "../context/emailContext";
 import { TbArrowUpRight } from "react-icons/tb";
 import { TbArrowUpLeft } from "react-icons/tb";
 import { updateSurveyStep } from "../actions/actions";
+import { revalidatePath } from "next/cache";
 export default function SurveyQuestion() {
   const [ratings, setRatings] = useState({
     comfort: null,
@@ -36,6 +37,7 @@ export default function SurveyQuestion() {
 
       setError("Error saving your response. Please try again.");
     } else {
+      revalidatePath("/step4");
       router.push("/step4");
     }
   };

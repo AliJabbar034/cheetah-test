@@ -9,6 +9,7 @@ import shoes1 from "../assests/s1.png";
 import shoes2 from "../assests/s2.png";
 import { TbArrowUpRight } from "react-icons/tb";
 import { updateSurveyStep } from "../actions/actions";
+import { revalidatePath } from "next/cache";
 
 export default function Step2() {
   const [selectedOption, setSelectedOption] = useState("");
@@ -23,6 +24,7 @@ export default function Step2() {
     if (result.error) {
       setError("Failed to save your selection. Please try again.");
     } else {
+      revalidatePath("/step3");
       router.push("/step3");
     }
   };
